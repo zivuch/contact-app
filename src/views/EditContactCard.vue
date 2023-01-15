@@ -1,3 +1,5 @@
+i wouldn't make another component, duplicating code is a bad habit
+
 <template>
     <form @submit.prevent="saveContact" class="container">
         <div class="left">

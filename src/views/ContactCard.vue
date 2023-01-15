@@ -1,81 +1,58 @@
 <template>
-    <button class="button" v-on:click="getContactData">Get Contact Data</button><br>
-    <div v-for="contactData in contactDataList" :key="contactData.id" class="flex-container">
-        <div class="left">
-            <img class="img" :src="contactData.image"/>
-            <div class="title">{{ contactData.title }}</div>
+    <div class="left">
+        <img class="img" :src="contactData.image"/>
+        <div class="title">{{ contactData.title }}</div>
+    </div>
+    <div class="right">
+        <div class="name">
+            <div>{{ contactData.firstname }} {{ contactData.lastname }}</div>
         </div>
-        <div class="right">
-            <div class="name">
-                <div>{{ contactData.firstname }} {{ contactData.lastname }}</div>
-            </div>
-            <div class="coordinates">
+            <!-- <div class="coordinates">
                 <div>{{ contactData.latitude }} {{ contactData.longitude }}</div>
-            </div>
-            <div class="company">
+            </div> -->
+            <!-- <div class="company">
                 <div>{{ contactData.company }}</div>
-            </div>
-            <div class="address">
+            </div> -->
+            <!-- <div class="address">
                 <div>{{ contactData.address.num }} {{ contactData.address.street }} {{ contactData.address.apt }}</div>
                 <div>{{ contactData.address.city }} {{ contactData.address.state }} {{ contactData.address.postalcode }}</div>
-            </div>
-            <div class="phonenumber">
-                <div>P: {{ contactData.phonenumber }}</div>
-            </div>
-        </div>
+            </div> -->
+    </div>
+    <div class="phonenumber">
+        <div>P: {{ contactData.phonenumber }}</div>
+    </div>
         <div class="options">
-            <button @click="editContactData()">
+            <button @click="editContactData">
                 <font-awesome-icon icon="fa-solid fa-pencil" />&nbsp;&nbsp;
             </button>
-            <button @click="deleteContact(index)">
+            <button @click="deleteContact">
                 <font-awesome-icon icon="fa-solid fa-trash" />
             </button>
-        </div>  
-    </div>
-    <AddContactIcon/>
+        </div>
 </template>
-
 <script>
-import axios from 'axios';
-import AddContactIcon from '@/components/AddContactIcon.vue';
-// import EditContactCardVue from './EditContactCard.vue';
-
 export default {
-    name: 'ContactCard',
-    components: {
-        AddContactIcon,
+    name:'contactCard',
+    props:{
+        contactData:{ type:Object, default:()=>{} },
+        index:{type:Number,required:true}
     },
-    props: {
-        // contactDataLis   t: { type: Array, required: true }
-    },
-    data() {
-        return {
-            contactDataList: []
-        };
-    },
-    methods: {
-        getContactData(){
-            axios.get("Contacts.json").then(response => (this.contactDataList = response.data));
-            //Or without using Axios:
-            // fetch('Contacts.json')
-            // .then(res => res.json())
-            // .then(data => (this.contactDataList = data))    
-        },
-        deleteContact(index) {
-            this.contactDataList.splice(index, 1);
+    methods:{
+        deleteContact(){
+            // implement this. use the index to access the vuex store (index.js) in order to delete this card
+            console.log("helo",this.index);
         },
         editContactData(){
-            // <EditContactCardVue/>
+            // i would make the cards lines as inputs. and make them readonly, and when the user clicks on edit
+            // i would make the inputs not read only anymore and editable. afterwards ill make a function in the store
+            // that access the list in the correct index, either edit it directly using v-models, or override it completely with scoped state
+            console.log('hello',this.index);
         }
     }
-};
+}
 </script>
 
-<style>
-body{
-    background-color: lightgray;
-    color: grey;
-}
+<style scoped>
 .flex-container{
     background-color: white;
     display: inline-flex;

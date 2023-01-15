@@ -1,19 +1,19 @@
 <template>
-  <ContactCard/>
+  <ContactCardList/>
   <!-- <AddContactIcon/> -->
   <AddContactCard/>
 
 </template>
 
 <script>
-import ContactCard from './views/ContactCard.vue';
+import ContactCardList from './views/ContactCardList.vue';
 // import AddContactIcon from './components/AddContactIcon.vue'
 import AddContactCard from './views/AddContactCard.vue';
 
 export default {
   name: 'App',
   components: {
-    ContactCard,
+    ContactCardList,
     // AddContactIcon,
     AddContactCard
   }
